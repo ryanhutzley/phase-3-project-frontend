@@ -1,12 +1,14 @@
 import './App.css';
 import { Route, Switch } from "react-router-dom";
 import { useState, useEffect } from "react"
-import LogIn from './LogIn'
-import Survey from './Survey'
-import CalendarEditing from './CalendarEditing'
-import FinalCalendar from './FinalCalendar'
+import LogIn from './Components/LogIn'
+import MyAccount from './Components/MyAccount'
+import MyRecommendations from './Components/MyRecommendations'
+import MyBookings from './Components/MyBookings'
+import Header from './Components/Header'
 
 function App() {
+  
 
   const [users, setUsers] = useState([])
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -17,10 +19,11 @@ function App() {
 
   return (
     <div>
+      <Header />
       <Switch>
-        <Route path='/Survey' component={Survey}/>
-        <Route path='/CalendarEditing' component={<CalendarEditing calendarUpdated={setCalendarUpdated} />}/>
-        <Route path='/FinalCalendar' component={FinalCalendar}/>
+        <Route path='/MyAccount' component={MyAccount}/>
+        <Route path='/MyRecommendations' component={MyRecommendations}/>
+        <Route path='/MyBookings' component={MyBookings}/>
         <Route exactPath='/' component={() => <LogIn users={users} isLoggedIn={isLoggedIn}/>}/>
       </Switch>
     </div>
