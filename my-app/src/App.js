@@ -11,20 +11,34 @@ function App() {
   
 
   const [users, setUsers] = useState([])
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [calendarUpdated, setCalendarUpdated] = useState(false)
-  
+  const [loggedInUser, setLoggedInUser] = useState("")
+  const [myBookings, setMyBookings] = useState([])
+
+console.log(loggedInUser)
+  useEffect(() => {
+    fetch(`http://127.0.0.1:9393/bookings/${loggedInUser.id}`)
+    .then(res => res.json())
+    .then(ary => {
+        setMyBookings(ary)
+    })
+  }, [loggedInUser])
+
+  useEffect(() => {
+    fetch("http://localhost:9393/users")
+    .then(res => res.json())
+    .then(data => setUsers(data))
+}, [])
 
 // will be building a use effect hook to reach into the database on page load and setting users state
 
   return (
     <div>
-      <Header />
+      <Header setLoggedInUser={setLoggedInUser}/>
       <Switch>
-        <Route path='/MyAccount' component={MyAccount}/>
+        <Route path='/MyAccount' component={() => <MyAccount loggedInUser={loggedInUser} />}/>
         <Route path='/MyRecommendations' component={MyRecommendations}/>
-        <Route path='/MyBookings' component={MyBookings}/>
-        <Route exactPath='/' component={() => <LogIn users={users} isLoggedIn={isLoggedIn}/>}/>
+        <Route path='/MyBookings' component={() => <MyBookings myBookings={myBookings} />}/>
+        <Route exactPath='/' component={() => <LogIn users={users} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>}/>
       </Switch>
     </div>
   )

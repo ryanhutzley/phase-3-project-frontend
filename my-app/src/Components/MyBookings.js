@@ -2,27 +2,29 @@
 import ActivityCard from './ActivityCard'
 import Grid from '@material-ui/core/Grid'
 
-function MyBookings () {
+function MyBookings ({myBookings}) {
+
+
+    let myBookingsArray = myBookings.map((booking, index) => {
+    return <Grid item xs={6} sm={3} key={index} >
+       <ActivityCard dayOfWeek={booking.day_of_week} imageURL={booking.activity.img_url} description={booking.activity.description} duration={booking.activity.duration} activityName={booking.activity.name}/>
+        </Grid>
+    })
+
+    console.log(myBookingsArray)
+    console.log(myBookings[0])
+    // console.log(myBookings)
+    // let myBookingCards = []
+
+  
 
 // MyActivities = bookings.map(activity => <activitycard props/>)
 
     return ( 
     <div>
         <h1>My Bookings</h1>
-        {/* MyActivities */}
         <Grid container spacing={8}>
-        <Grid item xs={6} sm={3}>
-        <ActivityCard />
-        </Grid>
-        <Grid item xs={6} sm={3}>
-        <ActivityCard />
-        </Grid>
-        <Grid item xs={6} sm={3}>
-        <ActivityCard />
-        </Grid>
-        <Grid item xs={6} sm={3}>
-        <ActivityCard />
-        </Grid>
+            {myBookingsArray}
         </Grid>
 
     </div>

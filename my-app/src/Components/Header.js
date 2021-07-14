@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
 
-function Header () {
+function Header ({ setLoggedInUser }) {
 
-// OnClick function to set loggedin state to false
+// OnClick function to set loggedInUser state
 
     return(
         <div>
@@ -11,10 +11,9 @@ function Header () {
                 <NavLink to='/MyAccount'>My Account</NavLink> 
                 <NavLink to='/MyRecommendations'>My Recs</NavLink>
                 <NavLink to='/MyBookings'>My Bookings</NavLink>
-                 <NavLink to='/'>LogOut</NavLink>
-              
+                <NavLink to='/' onClick={() => setLoggedInUser("")}>LogOut</NavLink>
             </nav>
-            </div>
+        </div>
     )
 }
 
