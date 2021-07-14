@@ -80,6 +80,15 @@ function LogIn ({ users, setLoggedInUser }) {
                     <input type="checkbox" value="Strength"></input>
                     <label>Strength</label>
                     <br/>
+                    <input type="checkbox" value="Music"></input>
+                    <label>Music</label>
+                    <br/>
+                    <input type="checkbox" value="Long Workouts ( > 60 mins)"></input>
+                    <label>Long Workouts ( {'>'} 60 mins)</label>
+                    <br/>
+                    <input type="checkbox" value="Short Workouts ( < 60 mins)"></input>
+                    <label>Short Workouts ( {'<'} 60 mins)</label>
+                    <br/>
                     <input type="checkbox" value="Early Morning (6-8am)"></input>
                     <label>Early Morning (6-8am)</label>
                     <br/>
