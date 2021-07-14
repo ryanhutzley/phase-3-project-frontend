@@ -7,12 +7,9 @@ function MyBookings ({myBookings}) {
 
     let myBookingsArray = myBookings.map((booking, index) => {
     return <Grid item xs={6} sm={3} key={index} >
-       <ActivityCard dayOfWeek={booking.day_of_week} imageURL={booking.activity.img_url} description={booking.activity.description} duration={booking.activity.duration} activityName={booking.activity.name}/>
+       <ActivityCard activityUsers={booking.activity_users} dayOfWeek={booking.day_of_week} imageURL={booking.activity.img_url} description={booking.activity.description} activityName={booking.activity.name}/>
         </Grid>
     })
-
-    console.log(myBookingsArray)
-    console.log(myBookings[0])
     // console.log(myBookings)
     // let myBookingCards = []
 

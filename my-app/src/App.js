@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react"
 import LogIn from './Components/LogIn'
 import MyAccount from './Components/MyAccount'
@@ -13,14 +13,15 @@ function App() {
   const [users, setUsers] = useState([])
   const [loggedInUser, setLoggedInUser] = useState("")
   const [myBookings, setMyBookings] = useState([])
+  const history = useHistory()
 
 console.log(loggedInUser)
   useEffect(() => {
-    fetch(`http://127.0.0.1:9393/bookings/${loggedInUser.id}`)
-    .then(res => res.json())
-    .then(ary => {
-        setMyBookings(ary)
-    })
+      fetch(`http://127.0.0.1:9393/bookings/${loggedInUser.id}`)
+      .then(res => res.json())
+      .then(ary => {
+          setMyBookings(ary)
+      })
   }, [loggedInUser])
 
   useEffect(() => {
@@ -33,12 +34,12 @@ console.log(loggedInUser)
 
   return (
     <div>
-      <Header setLoggedInUser={setLoggedInUser}/>
+      <Header loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>
       <Switch>
         <Route path='/MyAccount' component={() => <MyAccount loggedInUser={loggedInUser} />}/>
-        <Route path='/MyRecommendations' component={MyRecommendations}/>
+        <Route path='/MyRecommendations' component={() => <MyRecommendations loggedInUser={loggedInUser} />}/>
         <Route path='/MyBookings' component={() => <MyBookings myBookings={myBookings} />}/>
-        <Route exactPath='/' component={() => <LogIn users={users} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>}/>
+        <Route exactPath='/' component={() => <LogIn history={history} users={users} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>}/>
       </Switch>
     </div>
   )

@@ -1,21 +1,18 @@
 import { useEffect, useState } from "react"
+// import { useNavigate } from "react-router-dom"
 
-function LogIn ({ users, setLoggedInUser }) {
-
+function LogIn ({ users, setLoggedInUser, history }) {
+    // let navigate = useNavigate();
     // const [users, setUsers] = useState([])
     const [formDisplayed, setFormDisplayed] = useState(false)
+    
+    // console.log(history)
 
     let userOptions = users.map(user => (
         <option key={user.id}>{user.name}</option>
     ))
     
-
-    // function printResults(e) {
-    //     e.preventDefault()
-    //     let checkedArray = Array.from(e.target).filter(element => element.checked)
-    //     let prefsArray = checkedArray.map(element => element.defaultValue)
-    //     console.log(prefsArray.join(", "))
-    // }
+     
 
     function logIn(e) {
         e.preventDefault()
@@ -35,10 +32,19 @@ function LogIn ({ users, setLoggedInUser }) {
                 })
             })
             .then(res => res.json())
-            .then(newUser => setLoggedInUser(newUser))
+            .then(newUser => {
+                if (newUser.id == null) {
+                    alert("This user is already taken")
+                    e.target.reset()
+                } else {
+                    setLoggedInUser(newUser)
+                    history.push("/MyAccount")
+                }
+            })
         } else {
             let userLoggedIn = users.find(user => user.name === e.target.selectedUser.value)
             setLoggedInUser(userLoggedIn)
+            history.push("/MyAccount")
         }
     }
 
@@ -68,44 +74,41 @@ function LogIn ({ users, setLoggedInUser }) {
                     </select>
                     <label>Preferences</label>
                     <br/>
-                    <input type="checkbox" value="Small Group"></input>
-                    <label>Small Group</label>
+                    <input type="checkbox" value="morning"></input>
+                    <label>Morning (6-11am)</label>
                     <br/>
-                    <input type="checkbox" value="Large Group"></input>
-                    <label>Large Group</label>
+                    <input type="checkbox" value="afternoon"></input>
+                    <label>Afternoon (11-4pm)</label>
                     <br/>
-                    <input type="checkbox" value="Cardio"></input>
-                    <label>Cardio</label>
+                    <input type="checkbox" value="evening"></input>
+                    <label>Evening (4-10pm)</label>
                     <br/>
-                    <input type="checkbox" value="Strength"></input>
-                    <label>Strength</label>
+                    <input type="checkbox" value="short_workout"></input>
+                    <label>Short Workouts (30 mins)</label>
                     <br/>
-                    <input type="checkbox" value="Music"></input>
+                    <input type="checkbox" value="medium_workout"></input>
+                    <label>Medium Workouts (longer than 60 mins, less than 90 mins)</label>
+                    <br/>
+                    <input type="checkbox" value="long_workout"></input>
+                    <label>Long Workouts (longer than 90 mins)</label>
+                    <br/>
+                    <input type="checkbox" value="music"></input>
                     <label>Music</label>
                     <br/>
-                    <input type="checkbox" value="Long Workouts ( > 60 mins)"></input>
-                    <label>Long Workouts ( {'>'} 60 mins)</label>
+                    <input type="checkbox" value="cardio"></input>
+                    <label>Cardio</label>
                     <br/>
-                    <input type="checkbox" value="Short Workouts ( < 60 mins)"></input>
-                    <label>Short Workouts ( {'<'} 60 mins)</label>
+                    <input type="checkbox" value="strength"></input>
+                    <label>Strength</label>
                     <br/>
-                    <input type="checkbox" value="Early Morning (6-8am)"></input>
-                    <label>Early Morning (6-8am)</label>
+                    <input type="checkbox" value="small_class_size"></input>
+                    <label>15 people or less</label>
                     <br/>
-                    <input type="checkbox" value="Late Morning (9-10am)"></input>
-                    <label>Late Morning (8-10am)</label>
+                    <input type="checkbox" value="medium_class_size"></input>
+                    <label>between 15 and 30 people</label>
                     <br/>
-                    <input type="checkbox" value="Early Afternoon (11-1pm)"></input>
-                    <label>Early Afternoon (11-1pm)</label>
-                    <br/>
-                    <input type="checkbox" value="Late Afternoon (2-3pm)"></input>
-                    <label>Late Afternoon (1-3pm)</label>
-                    <br/>
-                    <input type="checkbox" value="Early Evening (4-6pm)"></input>
-                    <label>Early Evening (4-6pm)</label>
-                    <br/>
-                    <input type="checkbox" value="Late Evening (7-10pm)"></input>
-                    <label>Late Evening (7-10pm)</label>
+                    <input type="checkbox" value="large_class_size"></input>
+                    <label>more than 30 people</label>
                     <br/>
                     <button type="submit">Submit</button>
             </form> :
