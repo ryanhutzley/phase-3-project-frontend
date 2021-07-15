@@ -19,7 +19,7 @@ function MyBookings ({myBookings}) {
 
     return ( 
     <div>
-        <h1>My Bookings</h1>
+        <h1 style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>My Bookings</h1>
         <Grid container spacing={8}>
             {myBookingsArray}
         </Grid>

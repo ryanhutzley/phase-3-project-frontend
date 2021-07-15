@@ -17,10 +17,15 @@ function App() {
   const [recsArray, setRecsArray] = useState([])
   const [allActivities, setAllActivities] = useState([])
   const [bookingMade, setBookingMade] = useState(0)
-  const [selectedDay, setDayOfWeek] = useState("Monday")
+  const [selectedDay, setDayOfWeek] = useState("")
   // const history = useHistory()
 
-console.log(loggedInUser)
+  useEffect(() => {
+    fetch("http://localhost:9393/users")
+    .then(res => res.json())
+    .then(data => setUsers(data))
+  }, [])
+
   useEffect(() => {
       fetch(`http://127.0.0.1:9393/bookings/${loggedInUser.id}`)
       .then(res => res.json())
@@ -29,11 +34,6 @@ console.log(loggedInUser)
       })
   }, [loggedInUser, bookingMade])
 
-  useEffect(() => {
-    fetch("http://localhost:9393/users")
-    .then(res => res.json())
-    .then(data => setUsers(data))
-}, [])
 
 useEffect(() => {
   fetch("http://localhost:9393/activities")
@@ -42,7 +42,7 @@ useEffect(() => {
 }, [])
 
 useEffect(() => {
-  if (loggedInUser) {
+  if (loggedInUser.id) {
     fetch(`http://127.0.0.1:9393/users/${loggedInUser.id}/recs`)
     .then(res => res.json())
     .then(activities => setRecsArray(activities))
@@ -62,9 +62,13 @@ function handleBooking (e) {
       "day_of_week": e.target.value
     })
   })
-  .then(() => {
-    setBookingMade(bookingMade => bookingMade + 1)
+  .then(res => res.json())
+  .then(booking => {
+    if (booking.id === null) alert("You have already booked this activity for this day!")
+    else {
+      setBookingMade(bookingMade => bookingMade + 1)
     alert("Your Booking has been made")
+    }
   })
 }
 

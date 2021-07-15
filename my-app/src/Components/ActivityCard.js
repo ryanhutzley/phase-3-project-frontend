@@ -1,5 +1,6 @@
-import { Card } from '@material-ui/core'
+import { Card, Button } from '@material-ui/core'
 import { useState, useEffect } from "react"
+import Box from '@material-ui/core/Box';
 
 function ActivityCard ({dayOfWeek, imageURL, activityName, description, activityUsers, handleBooking, activityId, selectedDay}) {
     
@@ -22,12 +23,11 @@ function ActivityCard ({dayOfWeek, imageURL, activityName, description, activity
     // console.log(`displayUsers: ${displayUsers}`)
 
     return(
-    
-        <Card>
-        <h4>{dayOfWeek}</h4>
-        <h3>{activityName}</h3>
-        <img src={imageURL} alt='probs zumba' style={{height:120, width:120}}/>
-        <h4>{description}</h4>
+        <Card overflow="auto" variant="outlined" style={{ display: 'flex', alignItems:'center', height: '50vh', flexDirection: 'column'}}>
+        {dayOfWeek ? <h4>{dayOfWeek}</h4> : null }
+        <h3 style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>{activityName}</h3>
+        <img src={imageURL} alt='probs zumba' style={{height:120, width:120, padding: '5px'}}/>
+        
         
         {activityUsersExists ?
         (displayUsers ?
@@ -35,16 +35,20 @@ function ActivityCard ({dayOfWeek, imageURL, activityName, description, activity
                 <ul>
                     {activityUsersList}
                 </ul> 
-                <button type="button" onClick={() => setDisplayUsers(!displayUsers)}>Hide Users</button> 
+                <Button variant="contained" onClick={() => setDisplayUsers(!displayUsers)}>Hide Users</Button> 
             </>:
-            <button type="button" onClick={() => setDisplayUsers(!displayUsers)}>Show Users</button>
+            <Button variant="contained" onClick={() => setDisplayUsers(!displayUsers)}>Show Users</Button>
          ) :
-         <button id={activityId} value={selectedDay} onClick={handleBooking}> Book </button>
+         <div style={{justifyContent: 'center'}}>
+         <Button variant="contained" id={activityId} value={selectedDay} onClick={handleBooking}> Book This Activity! </Button>
+         </div>
         }
+        <Box component="p" my={2} overflow="auto">{description}</Box>
         
 
         
         </Card>
+    
 
     )
 }
