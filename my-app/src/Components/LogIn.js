@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-// import { useNavigate } from "react-router-dom"
+import { Redirect } from "react-router-dom"
 
-function LogIn ({ users, setLoggedInUser, history }) {
+function LogIn ({ users, setLoggedInUser, loggedInUser }) {
     // let navigate = useNavigate();
     // const [users, setUsers] = useState([])
     const [formDisplayed, setFormDisplayed] = useState(false)
@@ -38,17 +38,20 @@ function LogIn ({ users, setLoggedInUser, history }) {
                     e.target.reset()
                 } else {
                     setLoggedInUser(newUser)
-                    history.push("/MyAccount")
+                    // return <Redirect to="/MyAccount" />
                 }
             })
         } else {
             let userLoggedIn = users.find(user => user.name === e.target.selectedUser.value)
             setLoggedInUser(userLoggedIn)
-            history.push("/MyAccount")
+            // return <Redirect to="/MyAccount" />
         }
     }
 
-    
+    console.log(loggedInUser)
+    if (loggedInUser.id) return <Redirect to="/MyAccount" /> 
+
+
     return (
         <>
             <form onSubmit={logIn}>
@@ -118,7 +121,7 @@ function LogIn ({ users, setLoggedInUser, history }) {
         </>
     )
 
-}
+} 
     
 
 export default LogIn

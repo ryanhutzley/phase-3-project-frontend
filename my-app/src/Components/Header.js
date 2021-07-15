@@ -13,6 +13,7 @@ function Header ({ loggedInUser, setLoggedInUser }) {
                 <NavLink to='/MyAccount'>My Account</NavLink> 
                 <NavLink to='/MyRecommendations'>My Recs</NavLink>
                 <NavLink to='/MyBookings'>My Bookings</NavLink>
+                <NavLink to='/ActivityCatalog'>Activity Catalog</NavLink>
                 <NavLink to='/' onClick={() => setLoggedInUser("")}>LogOut</NavLink> 
                 </nav>: 
                 null
