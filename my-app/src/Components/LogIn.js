@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Redirect } from "react-router-dom"
 import { Button, Select, MenuItem, FormControl, InputLabel, TextField, Checkbox, FormLabel, FormGroup, FormControlLabel } from '@material-ui/core'
+// import { Alert } from '@material-ui/lab'
 
 function LogIn ({ users, setLoggedInUser, loggedInUser }) {
     const [formDisplayed, setFormDisplayed] = useState(false)
@@ -37,6 +38,7 @@ function LogIn ({ users, setLoggedInUser, loggedInUser }) {
                 if (newUser.id == null) {
                     alert("This user is already taken")
                     e.target.reset()
+                    // return <Alert severity="error">"This user is already taken"</Alert>
                     // console.log(newUser)
                 } else {
                     setLoggedInUser(newUser)
@@ -51,7 +53,7 @@ function LogIn ({ users, setLoggedInUser, loggedInUser }) {
         }
     }
 
-    console.log(loggedInUser)
+    // console.log(loggedInUser)
     if (loggedInUser.id) return <Redirect to="/MyAccount" /> 
 
 
@@ -62,7 +64,7 @@ function LogIn ({ users, setLoggedInUser, loggedInUser }) {
             <FormControl margin="dense" variant="filled">
                 <form onSubmit={logIn} style={{display: 'flex', alignItems:'center', flexDirection: 'column'}}>
                     <InputLabel id="demo-simple-select-outlined-label">Log In</InputLabel>
-                    <Select style={{ minWidth: '180px', minHeight: '15px'}} onChange={e => setUsername(e.target.value)} variant="filled" label="Users" id="selectedUser" value={username}>
+                    <Select required style={{ minWidth: '180px', minHeight: '15px'}} onChange={e => setUsername(e.target.value)} variant="filled" label="Users" id="selectedUser" value={username}>
                         {userOptions}
                     </Select>
                     <br></br>
@@ -82,6 +84,7 @@ function LogIn ({ users, setLoggedInUser, loggedInUser }) {
                     <TextField required variant="filled" type="text" label="Age" placeholder="Age" id="age" style={{ minWidth: '150px', minHeight: '15px'}}></TextField>
                     <br></br>
                     <label style={{fontWeight: 'bold'}}>Fitness Level</label>
+                    <br></br>
                     <Select id="fitness" label="Fitness Level" style={{ minWidth: '180px', minHeight: '24px'}} variant="filled" value={fitnessLevel} onChange={e => setFitnessLevel(e.target.value)}>
                         <MenuItem value="0 times per week">0 times per week</MenuItem>
                         <MenuItem value="1-2 times per week">1-2 times per week</MenuItem>
