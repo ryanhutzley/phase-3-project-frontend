@@ -4,6 +4,13 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import WebFont from 'webfontloader';
+
+WebFont.load({
+  google: {
+    families: ['Cinzel', 'sans-serif']
+  }
+});
 
 ReactDOM.render(
   <BrowserRouter>

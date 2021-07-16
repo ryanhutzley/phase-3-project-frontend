@@ -18,12 +18,17 @@ function MyRecommendations ({recsArray, handleBooking, selectedDay, changeHandle
 
 
 let recsCards = recsArray.map((rec, index) => {
+  let truthyAttributes = []
+  for (const key in rec) {
+    if (key !== "id" && key !== "name" && key !== "img_url" && key !== "description" && rec[key]) truthyAttributes.push(key)
+  }
+  // console.log(truthyAttributes)
     return <Grid item xs={6} sm={3} key={index} >
-    <ActivityCard activityId={rec.id} selectedDay={selectedDay} handleBooking={handleBooking} imageURL={rec.img_url} description={rec.description} activityName={rec.name}/>
+    <ActivityCard activityId={rec.id} selectedDay={selectedDay} handleBooking={handleBooking} imageURL={rec.img_url} description={rec.description} activityName={rec.name} truthyAttributes={truthyAttributes}/>
      </Grid>
 })
         return (
-          <div>
+          <div style={{fontFamily:'Cinzel'}}>
             <h1 style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>My Recommendations</h1>
             <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
               <h4 style={{paddingRight: '10px'}}>Select a day of the week that you would like to make a booking for</h4>
@@ -39,11 +44,11 @@ let recsCards = recsArray.map((rec, index) => {
                          <MenuItem value="">
                             <em>None</em>
                             </MenuItem>
-                  <MenuItem value="monday">Monday</MenuItem>
-                  <MenuItem value="tuesday">Tuesday</MenuItem>
-                  <MenuItem value="wednesday">Wednesday</MenuItem>
-                  <MenuItem value="thursday">Thursday</MenuItem>
-                  <MenuItem value="friday">Friday</MenuItem>
+                  <MenuItem value="Monday">Monday</MenuItem>
+                  <MenuItem value="Tuesday">Tuesday</MenuItem>
+                  <MenuItem value="Wednesday">Wednesday</MenuItem>
+                  <MenuItem value="Thursday">Thursday</MenuItem>
+                  <MenuItem value="Friday">Friday</MenuItem>
                 </Select>
             </FormControl>
       </div>

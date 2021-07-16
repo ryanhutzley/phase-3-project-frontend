@@ -50,21 +50,23 @@ useEffect(() => {
 }, [loggedInUser])
 
 function handleBooking (e) {
-  // console.log(e.target.dataset.userId)
+  console.log(e.target.parentElement.id)
   fetch("http://localhost:9393/new_booking", {
     method: "POST",
     headers: {
       "Content-Type": "Application/json"
     },
     body: JSON.stringify({
-      "activity_id": parseInt(e.target.id),
+      "activity_id": parseInt(e.target.parentElement.id),
       "user_id": parseInt(loggedInUser.id),
-      "day_of_week": e.target.value
+      "day_of_week": selectedDay
     })
   })
   .then(res => res.json())
   .then(booking => {
-    if (booking.id === null) alert("You have already booked this activity for this day!")
+    console.log(booking)
+    if (booking.id === null && booking.day_of_week !== "") alert("You have already booked this activity for this day!")
+    else if (booking.day_of_week === "") alert("You have not selected a day for this activity")
     else {
       setBookingMade(bookingMade => bookingMade + 1)
     alert("Your Booking has been made")
@@ -76,6 +78,7 @@ function changeHandler (e) {
   setDayOfWeek(e.target.value)
 }
 // will be building a use effect hook to reach into the database on page load and setting users state
+// console.log(`users: ${users}`)
 
   return (
     <div>

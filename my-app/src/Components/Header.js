@@ -8,7 +8,7 @@ function Header ({ loggedInUser, setLoggedInUser }) {
 
     return(
         <div >
-            <h1 style={{display: 'flex',  justifyContent:'center', alignItems:'center'}} >Pumping Flatiron</h1>
+            <h1 style={{ fontFamily:'Cinzel', display: 'flex',  justifyContent:'center', alignItems:'center'}} >Pumping Flatiron</h1>
             <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
                 {loggedInUser.id ? 
                 <nav >

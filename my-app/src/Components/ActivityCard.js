@@ -2,7 +2,9 @@ import { Card, Button } from '@material-ui/core'
 import { useState, useEffect } from "react"
 import Box from '@material-ui/core/Box';
 
-function ActivityCard ({dayOfWeek, imageURL, activityName, description, activityUsers, handleBooking, activityId, selectedDay}) {
+function ActivityCard ({dayOfWeek, imageURL, activityName, description, activityUsers, handleBooking, activityId, selectedDay, truthyAttributes}) {
+
+    // activityMorning, activityAfternoon, activityEvening, activityShortWorkout, activityMediumWorkout, activityLongWorkout, activityMusic, activityCardio, activityStrength, activitySmallSize, activityMediumSize, activityLargeSize
     
     const [displayUsers, setDisplayUsers] = useState(false)
     const [activityUsersExists, setExistsStatus] = useState(false)
@@ -17,40 +19,64 @@ function ActivityCard ({dayOfWeek, imageURL, activityName, description, activity
     if (activityUsersExists) {
         activityUsersList = activityUsers.map((user, index) => <li key={index}>{user}</li>)
     }
+
+    let attributesList = truthyAttributes.map((attribute, index) => {
+       let splitAttr = attribute.split("_")
+       let joinedAttr = splitAttr.join(" ") 
+       return <li key={index}>{joinedAttr}</li>
+    })
     
     
     // console.log(`activityUsersExist: ${activityUsersExists}`)
     // console.log(`displayUsers: ${displayUsers}`)
 
     return(
-        <Card overflow="auto" variant="outlined" style={{ display: 'flex', alignItems:'center', height: '50vh', flexDirection: 'column'}}>
-        {dayOfWeek ? <h4>{dayOfWeek}</h4> : null }
-        <h3 style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>{activityName}</h3>
-        <img src={imageURL} alt='probs zumba' style={{height:120, width:120, padding: '5px'}}/>
-        
-        
-        {activityUsersExists ?
-        (displayUsers ?
+        <Card style={{ display: 'flex', alignItems:'center', flexDirection: 'column', height: '50vh'}}>
+            <Box component='div' my={2} overflow="auto" style={{padding: '15px', display: 'flex', alignItems:'center', flexDirection: 'column', height: '45vh'}} >
+            {dayOfWeek ? <h4>{dayOfWeek}</h4> : null }
+            <h3 >{activityName}</h3>
+            <img src={imageURL} alt='probs zumba' style={{height:'120px', width:'120px', padding: '5px'}}/>
+            
+            
+            {/* {activityUsersExists ?
+            (displayUsers ?
+                <>
+                    <ul>
+                        {activityUsersList}
+                    </ul> 
+                    <Button variant="contained" onClick={() => setDisplayUsers(!displayUsers)}>Hide Users</Button> 
+                </>:
+                <Button variant="contained" onClick={() => setDisplayUsers(!displayUsers)}>Show Users</Button>
+            ) :
+            <div style={{justifyContent: 'center'}}>
+            <Button variant="contained" id={activityId} onClick={handleBooking}> Book This Activity! </Button>
+            </div>
+            } */}
+
+            {!activityUsersExists
+            ? <div style={{justifyContent: 'center'}}>
+            <Button variant="contained" id={activityId} onClick={handleBooking}> Book This Activity! </Button>
+            </div>
+            :
             <>
-                <ul>
-                    {activityUsersList}
-                </ul> 
-                <Button variant="contained" onClick={() => setDisplayUsers(!displayUsers)}>Hide Users</Button> 
-            </>:
-            <Button variant="contained" onClick={() => setDisplayUsers(!displayUsers)}>Show Users</Button>
-         ) :
-         <div style={{justifyContent: 'center'}}>
-         <Button variant="contained" id={activityId} value={selectedDay} onClick={handleBooking}> Book This Activity! </Button>
-         </div>
-        }
-        <Box component="p" my={2} overflow="auto">{description}</Box>
-        
-
-        
-        </Card>
-    
-
-    )
+            {displayUsers ? 
+            <div>
+            <ul style={{maxHeight: '100%', overflow: 'auto'}} >
+                {activityUsersList}
+            </ul> 
+            <Button variant="contained" onClick={() => setDisplayUsers(!displayUsers)}>Hide Attendees</Button> 
+            </div>
+            :
+            <Button variant="contained" onClick={() => setDisplayUsers(!displayUsers)}> Show Attendees</Button> }
+            </>
+            }
+            <p>{description}</p>
+            <ul>
+                {attributesList}
+            </ul>
+            </Box>
+            </Card>
+        )
 }
 
 export default ActivityCard
