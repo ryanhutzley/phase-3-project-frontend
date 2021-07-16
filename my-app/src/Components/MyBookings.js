@@ -2,7 +2,7 @@
 import ActivityCard from './ActivityCard'
 import Grid from '@material-ui/core/Grid'
 
-function MyBookings ({myBookings}) {
+function MyBookings ({myBookings, handleDelete}) {
 
 
     let order = { Sunday: 1, Monday: 2, Tuesday: 3, Wednesday: 4, Thursday: 5, Friday: 6, Saturday: 7 };
@@ -16,7 +16,7 @@ function MyBookings ({myBookings}) {
         if (key !== "id" && key !== "name" && key !== "img_url" && key !== "description" && booking.activity[key]) truthyAttributes.push(key)
         }
     return <Grid item xs={6} sm={3} key={index} >
-       <ActivityCard activityUsers={booking.activity_users} dayOfWeek={booking.day_of_week} imageURL={booking.activity.img_url} description={booking.activity.description} activityName={booking.activity.name} truthyAttributes={truthyAttributes}/>
+       <ActivityCard handleDelete={handleDelete} activityUsers={booking.activity_users} dayOfWeek={booking.day_of_week} imageURL={booking.activity.img_url} description={booking.activity.description} activityName={booking.activity.name} truthyAttributes={truthyAttributes}/>
         </Grid>
     })
     // console.log(myBookings)

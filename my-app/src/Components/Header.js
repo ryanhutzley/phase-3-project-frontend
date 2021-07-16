@@ -18,7 +18,7 @@ function Header ({ loggedInUser, setLoggedInUser }) {
                 <Chip component={NavLink} to='/ActivityCatalog' exact label="Activity Catalog" clickable color="primary" style={{margin: '5px'}}/>
                 <Chip component={NavLink} to='/' exact label="Log Out" clickable color="primary" onClick={() => setLoggedInUser("")} style={{margin: '5px'}}/>
                 </nav>: 
-                null
+                <img src="https://s3.envato.com/files/264011467/2019_04_03_2905.jpg" alt="dumbbell"/>
                 } 
                 </div>
         </div>

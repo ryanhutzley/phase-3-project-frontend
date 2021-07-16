@@ -17,7 +17,7 @@ function LogIn ({ users, setLoggedInUser, loggedInUser }) {
 
     function logIn(e) {
         e.preventDefault()
-        console.log(e)
+        // console.log(e)
         let formValues = Array.from(e.target).filter(element => element.checked)
         let prefsArray = formValues.map(element => element.defaultValue)
         if (e.target.name) {
