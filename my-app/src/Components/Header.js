@@ -2,13 +2,15 @@ import { NavLink } from "react-router-dom";
 import{ Chip } from '@material-ui/core'
 
 
-function Header ({ loggedInUser, setLoggedInUser }) {
+function Header ({ loggedInUser, setLoggedInUser, windowWidth }) {
 
-// OnClick function to set loggedInUser state
+    // OnClick function to set loggedInUser state
+
+    console.log(loggedInUser)
 
     return(
-        <div >
-            <h1 style={{ fontFamily:'Cinzel', display: 'flex',  justifyContent:'center', alignItems:'center', width: '100vw'}} >Pumping Flatiron</h1>
+        <div style={{width: '100vw'}}>
+            <h1 style={{ fontFamily:'Cinzel', textAlign: 'center'}}>Pumping Flatiron</h1>
             <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
                 {loggedInUser.id ? 
                 <nav >
@@ -17,8 +19,8 @@ function Header ({ loggedInUser, setLoggedInUser }) {
                 <Chip component={NavLink} to='/MyBookings' exact label="Booked Activities" clickable color="primary" style={{margin: '5px'}}/>
                 <Chip component={NavLink} to='/ActivityCatalog' exact label="Activity Catalog" clickable color="primary" style={{margin: '5px'}}/>
                 <Chip component={NavLink} to='/' exact label="Log Out" clickable color="primary" onClick={() => setLoggedInUser("")} style={{margin: '5px'}}/>
-                </nav>: 
-                <img src="https://s3.envato.com/files/264011467/2019_04_03_2905.jpg" alt="dumbbell"/>
+                </nav> : 
+                <img src="https://s3.envato.com/files/264011467/2019_04_03_2905.jpg" alt="dumbbell" style={{width: windowWidth < 768 ? '90vw' : '40vw'}}/>
                 } 
                 </div>
         </div>

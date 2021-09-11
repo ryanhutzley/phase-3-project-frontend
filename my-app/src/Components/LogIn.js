@@ -58,6 +58,8 @@ function LogIn ({ users, setLoggedInUser, loggedInUser }) {
 
 
     return (
+        <>
+        {!formDisplayed ? (
         <div style={{display: 'flex', justifyContent:'center', alignItems:'center', flexDirection: 'column'}}>
             <br></br>
             <h3 style={{margin: 'auto'}}>Sign In</h3>
@@ -70,11 +72,12 @@ function LogIn ({ users, setLoggedInUser, loggedInUser }) {
                     <br></br>
                     <Button variant="contained" type="submit">Go</Button>
                     <br></br>
+                    <Button variant="contained" onClick={() => setFormDisplayed(!formDisplayed)}>Create New Account</Button>
                     <br></br>
                 </form>
             </FormControl>
-
-            {formDisplayed ?
+        </div>) : (
+        <div style={{display: 'flex', justifyContent:'center', alignItems:'center', flexDirection: 'column'}}>
             <FormControl margin="dense">
                 <h3 style={{margin: "auto"}}>Create New User</h3>
                 <br></br>
@@ -146,15 +149,14 @@ function LogIn ({ users, setLoggedInUser, loggedInUser }) {
                     </FormGroup>
                     <Button type="submit" variant="contained" color="primary">Submit</Button>
                     </form>
-            </FormControl> :
-                null }
+            </FormControl>
             <br></br>
-            <Button variant="contained" onClick={() => setFormDisplayed(!formDisplayed)}>{formDisplayed ? "Hide Form" : "Create New User"}</Button>
+            <Button variant="contained" onClick={() => setFormDisplayed(!formDisplayed)}>Back to Login</Button>
             <br></br>
             <br></br>
-        </div>
+        </div>)}
+        </>
     )
-
 } 
     
 

@@ -27,41 +27,37 @@ function ActivityCatalog ({allActivities, changeHandler, selectedDay, handleBook
     })
 
     return(
-        <div style={{fontFamily:'Cinzel'}}>
-        <h1 style={{display: 'flex',  justifyContent:'center', alignItems:'center', paddingBottom: "20px", paddingTop: '10px'}}> Activity Catalog </h1>
-
-        <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', flexDirection: 'column'}}>
-        <TextField variant="filled" style={{backgroundColor: 'white', borderRadius: '5px'}} label="Search For Activities" value={filterInput} onChange={handleSearch} />
-        <h4 style={{paddingRight: '10px'}}>Select a day of the week that you would like to make a booking for</h4>
-             <FormControl variant="outlined"  >
-              <InputLabel id="demo-simple-select-outlined-label">{selectedDay ? selectedDay.charAt(0).toUpperCase() + selectedDay.slice(1) : "Select A Day" } </InputLabel>
-                <Select
-                  defaultValue = ''
-                  label="Select A Day"
-                  style={{ minWidth: '180px'}}
-                  onChange={changeHandler} name="day_of_week" id="selectedDay"
-                >
-             
-                         <MenuItem value="">
-                            <em>None</em>
-                            </MenuItem>
-                  <MenuItem value="Monday">Monday</MenuItem>
-                  <MenuItem value="Tuesday">Tuesday</MenuItem>
-                  <MenuItem value="Wednesday">Wednesday</MenuItem>
-                  <MenuItem value="Thursday">Thursday</MenuItem>
-                  <MenuItem value="Friday">Friday</MenuItem>
-                </Select>
-            </FormControl>
-            
-                <br/>
-                <br/>
-                
-                </div>
-
-    
-         <Grid container spacing={8} >
-            {cards}
-        </Grid>
+        <div style={{fontFamily:'Cinzel', width: '100vw'}}>
+          <div style={{display: 'block'}}>
+            <h1 style={{textAlign: 'center'}}> Activity Catalog </h1>
+              <div style={{textAlign: 'center'}}>
+                <TextField variant="filled" style={{backgroundColor: 'white', borderRadius: '5px'}} label="Search For Activities" value={filterInput} onChange={handleSearch} />
+                <h4 style={{paddingRight: '10px'}}>Select a day of the week that you would like to make a booking for</h4>
+                    <FormControl variant="outlined"  >
+                      <InputLabel id="demo-simple-select-outlined-label">{selectedDay ? selectedDay.charAt(0).toUpperCase() + selectedDay.slice(1) : "Select A Day" } </InputLabel>
+                        <Select
+                          defaultValue = ''
+                          label="Select A Day"
+                          style={{ minWidth: '180px'}}
+                          onChange={changeHandler} name="day_of_week" id="selectedDay"
+                        >
+                          <MenuItem value="">
+                              <em>None</em>
+                              </MenuItem>
+                          <MenuItem value="Monday">Monday</MenuItem>
+                          <MenuItem value="Tuesday">Tuesday</MenuItem>
+                          <MenuItem value="Wednesday">Wednesday</MenuItem>
+                          <MenuItem value="Thursday">Thursday</MenuItem>
+                          <MenuItem value="Friday">Friday</MenuItem>
+                        </Select>
+                    </FormControl>
+                    <br/>
+                    <br/>
+              </div>
+          </div>    
+          <Grid container spacing={4} style={{margin: 'auto', width: '90vw'}}>
+              {cards}
+          </Grid>
         </div>
     )
 }

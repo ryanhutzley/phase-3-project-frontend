@@ -29,9 +29,9 @@ function MyBookings ({myBookings, handleDelete}) {
 // MyActivities = bookings.map(activity => <activitycard props/>)
 
     return ( 
-    <div style={{fontFamily:'Cinzel'}}>
+    <div style={{fontFamily:'Cinzel', width: '100vw'}}>
         <h1 style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>My Bookings</h1>
-        <Grid container spacing={8}>
+        <Grid container spacing={4} style={{margin: 'auto', width: '90vw'}}>
             {myBookingsArray}
         </Grid>
 

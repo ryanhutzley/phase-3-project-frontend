@@ -42,11 +42,11 @@ function ActivityCard ({dayOfWeek, imageURL, activityName, description, activity
     // console.log(`displayUsers: ${displayUsers}`)
 
     return(
-        <Card style={{ display: 'flex', alignItems:'center', flexDirection: 'column', height: '50vh'}}>
-            <Box component='div' my={2} overflow="auto" style={{padding: '15px', display: 'flex', alignItems:'center', flexDirection: 'column', height: '45vh'}} >
+        <Card style={{ display: 'flex', alignItems:'center', flexDirection: 'column', flexWrap: 'wrap', height: '50vh'}}>
+            <Box component='div' my={2} overflow="auto" style={{padding: '15px', display: 'flex', alignItems:'center', flexDirection: 'column', height: '45vh'}}>
             {dayOfWeek ? <h4>{dayOfWeek}</h4> : null }
-            <h3 >{activityName}</h3>
-            <img src={imageURL} alt='probs zumba' style={{height:'120px', width:'120px', padding: '5px'}}/>
+            <h3 style={{textAlign: 'center'}}>{activityName}</h3>
+            <img src={imageURL} alt='activity' style={{height:'120px', width:'120px', padding: '5px'}}/>
             <br></br>
             
             {/* {activityUsersExists ?
@@ -89,7 +89,7 @@ function ActivityCard ({dayOfWeek, imageURL, activityName, description, activity
             </div>}
             </>
             }
-            <p>{description}</p>
+            <p style={{textAlign: 'center'}}>{description}</p>
             <ul>
                 {attributesList}
             </ul>

@@ -28,30 +28,32 @@ let recsCards = recsArray.map((rec, index) => {
      </Grid>
 })
         return (
-          <div style={{fontFamily:'Cinzel'}}>
-            <h1 style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>My Recommendations</h1>
-            <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-              <h4 style={{paddingRight: '10px'}}>Select a day of the week that you would like to make a booking for</h4>
-             <FormControl variant="outlined"  >
-              <InputLabel id="demo-simple-select-outlined-label">{selectedDay ? selectedDay.charAt(0).toUpperCase() + selectedDay.slice(1) : "Select A Day" } </InputLabel>
-                <Select
-                  defaultValue = ''
-                  label="Select A Day"
-                  style={{ minWidth: '180px'}}
-                  onChange={changeHandler} name="day_of_week" id="selectedDay"
-                >
-             
-                         <MenuItem value="">
-                            <em>None</em>
-                            </MenuItem>
-                  <MenuItem value="Monday">Monday</MenuItem>
-                  <MenuItem value="Tuesday">Tuesday</MenuItem>
-                  <MenuItem value="Wednesday">Wednesday</MenuItem>
-                  <MenuItem value="Thursday">Thursday</MenuItem>
-                  <MenuItem value="Friday">Friday</MenuItem>
-                </Select>
-            </FormControl>
-      </div>
+          <div style={{fontFamily:'Cinzel', width: '100vw'}}>
+            <div style={{display: 'block'}}> 
+              <h1 style={{textAlign: 'center'}}>My Recommendations</h1>
+              <div style={{textAlign: 'center'}}>
+                <h4>Select a day of the week that you would like to make a booking for</h4>
+                <FormControl variant="outlined"  >
+                  <InputLabel id="demo-simple-select-outlined-label">{selectedDay ? selectedDay.charAt(0).toUpperCase() + selectedDay.slice(1) : "Select A Day" } </InputLabel>
+                    <Select
+                      defaultValue = ''
+                      label="Select A Day"
+                      style={{ minWidth: '180px'}}
+                      onChange={changeHandler} name="day_of_week" id="selectedDay"
+                    >
+                
+                            <MenuItem value="">
+                                <em>None</em>
+                                </MenuItem>
+                      <MenuItem value="Monday">Monday</MenuItem>
+                      <MenuItem value="Tuesday">Tuesday</MenuItem>
+                      <MenuItem value="Wednesday">Wednesday</MenuItem>
+                      <MenuItem value="Thursday">Thursday</MenuItem>
+                      <MenuItem value="Friday">Friday</MenuItem>
+                    </Select>
+                </FormControl>
+              </div>
+            </div>
               {/* <select onChange={changeHandler} name="day_of_week" id="selectedDay">
                    <option value="monday">Monday</option>
                    <option value="tuesday">Tuesday </option>
@@ -59,14 +61,9 @@ let recsCards = recsArray.map((rec, index) => {
                    <option value="thursday">Thursday</option>
                    <option value="friday">Friday</option>
                 </select> */}
-
                 <br/>
                 <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-            <Grid container spacing={8}>
+            <Grid container spacing={4} style={{margin: 'auto', width: '90vw'}}>
                 {recsCards}
             </Grid>
           </div>

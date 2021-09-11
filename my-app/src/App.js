@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { useState, useEffect } from "react"
 import LogIn from './Components/LogIn'
 import MyAccount from './Components/MyAccount'
@@ -18,6 +18,7 @@ function App() {
   const [allActivities, setAllActivities] = useState([])
   const [bookingMade, setBookingMade] = useState(0)
   const [selectedDay, setDayOfWeek] = useState("")
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   // const history = useHistory()
 
   useEffect(() => {
@@ -90,15 +91,25 @@ function App() {
   // will be building a use effect hook to reach into the database on page load and setting users state
   // console.log(`users: ${users}`)
 
+  window.addEventListener('resize', () => setWindowWidth(window.innerWidth))
+
   return (
     <div>
-      <Header loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>
+      <Header loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} windowWidth={windowWidth}/>
       <Switch>
-        <Route path='/MyAccount' component={() => <MyAccount loggedInUser={loggedInUser} />}/>
-        <Route path='/MyRecommendations' component={() => <MyRecommendations selectedDay={selectedDay} recsArray={recsArray} handleBooking={handleBooking} changeHandler={changeHandler} />}/>
-        <Route path='/MyBookings' component={() => <MyBookings myBookings={myBookings} handleDelete={handleDelete}/>}/>
-        <Route path='/ActivityCatalog' component={() => <ActivityCatalog allActivities={allActivities} changeHandler={changeHandler} selectedDay={selectedDay} handleBooking={handleBooking} />}/>
-        <Route exactPath='/' component={() => <LogIn users={users} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>}/>
+        <Route exact path='/MyAccount'>
+          {loggedInUser.id ?  <MyAccount loggedInUser={loggedInUser} windowWidth={windowWidth} /> : <Redirect to="/" />}
+        </Route>
+        <Route exact path='/MyRecommendations'>
+          {loggedInUser.id ? <MyRecommendations selectedDay={selectedDay} recsArray={recsArray} handleBooking={handleBooking} changeHandler={changeHandler} /> : <Redirect to="/" />} 
+        </Route>  
+        <Route exact path='/MyBookings'>
+          {loggedInUser.id ? <MyBookings myBookings={myBookings} handleDelete={handleDelete}/> : <Redirect to="/" />}
+        </Route>
+        <Route exact path='/ActivityCatalog'>
+          {loggedInUser.id ? <ActivityCatalog allActivities={allActivities} changeHandler={changeHandler} selectedDay={selectedDay} handleBooking={handleBooking} /> : <Redirect to="/" />}
+        </Route>
+        <Route exact path='/' component={() => <LogIn users={users} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>}/>
       </Switch>
     </div>
   )
