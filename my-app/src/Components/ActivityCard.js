@@ -42,7 +42,7 @@ function ActivityCard ({dayOfWeek, imageURL, activityName, description, activity
     // console.log(`displayUsers: ${displayUsers}`)
 
     return(
-        <Card style={{ display: 'flex', alignItems:'center', flexDirection: 'column', flexWrap: 'wrap', height: '50vh'}}>
+        <Card style={{ display: 'flex', alignItems:'center', flexDirection: 'column', flexWrap: 'wrap', height: '50vh', overflow: 'auto', textAlign: 'center'}}>
             <Box component='div' my={2} overflow="auto" style={{padding: '15px', display: 'flex', alignItems:'center', flexDirection: 'column', height: '45vh'}}>
             {dayOfWeek ? <h4>{dayOfWeek}</h4> : null }
             <h3 style={{textAlign: 'center'}}>{activityName}</h3>

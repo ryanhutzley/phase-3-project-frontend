@@ -10,7 +10,7 @@ function Header ({ loggedInUser, setLoggedInUser, windowWidth }) {
 
     return(
         <div style={{width: '100vw'}}>
-            <h1 style={{ fontFamily:'Cinzel', textAlign: 'center'}}>Pumping Flatiron</h1>
+            <h1 style={{ fontFamily:'Cinzel', textAlign: 'center', textDecoration: 'underline'}}>Pumping Flatiron</h1>
             <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
                 {loggedInUser.id ? 
                 <nav >
