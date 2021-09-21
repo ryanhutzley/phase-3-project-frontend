@@ -22,13 +22,13 @@ function App() {
   // const history = useHistory()
 
   useEffect(() => {
-    fetch("http://localhost:9393/users")
+    fetch("https://damp-mesa-84128.herokuapp.com/users")
     .then(res => res.json())
     .then(data => setUsers(data))
   }, [])
 
   useEffect(() => {
-      fetch(`http://127.0.0.1:9393/bookings/${loggedInUser.id}`)
+      fetch(`https://damp-mesa-84128.herokuapp.com/${loggedInUser.id}`)
       .then(res => res.json())
       .then(ary => {
           setMyBookings(ary)
@@ -37,14 +37,14 @@ function App() {
 
 
   useEffect(() => {
-    fetch("http://localhost:9393/activities")
+    fetch("https://damp-mesa-84128.herokuapp.com/activities")
     .then(res => res.json())
     .then(data => setAllActivities(data))
   }, [])
 
   useEffect(() => {
     if (loggedInUser.id) {
-      fetch(`http://127.0.0.1:9393/users/${loggedInUser.id}/recs`)
+      fetch(`https://damp-mesa-84128.herokuapp.com/${loggedInUser.id}/recs`)
       .then(res => res.json())
       .then(activities => setRecsArray(activities))
     }
@@ -52,7 +52,7 @@ function App() {
 
   function handleBooking (e) {
     console.log(e.target.parentElement.id)
-    fetch("http://localhost:9393/new_booking", {
+    fetch("https://damp-mesa-84128.herokuapp.com/new_booking", {
       method: "POST",
       headers: {
         "Content-Type": "Application/json"

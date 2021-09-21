@@ -21,7 +21,7 @@ function LogIn ({ users, setLoggedInUser, loggedInUser }) {
         let formValues = Array.from(e.target).filter(element => element.checked)
         let prefsArray = formValues.map(element => element.defaultValue)
         if (e.target.name) {
-            fetch("http://localhost:9393/new_user", {
+            fetch("https://damp-mesa-84128.herokuapp.com/new_user", {
                 method: "POST",
                 headers: {
                     "Content-Type": "Application/json"
