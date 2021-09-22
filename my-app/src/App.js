@@ -28,7 +28,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-      fetch(`https://damp-mesa-84128.herokuapp.com/${loggedInUser.id}`)
+      fetch(`https://damp-mesa-84128.herokuapp.com/bookings/${loggedInUser.id}`)
       .then(res => res.json())
       .then(ary => {
           setMyBookings(ary)
@@ -44,7 +44,7 @@ function App() {
 
   useEffect(() => {
     if (loggedInUser.id) {
-      fetch(`https://damp-mesa-84128.herokuapp.com/${loggedInUser.id}/recs`)
+      fetch(`https://damp-mesa-84128.herokuapp.com/users/${loggedInUser.id}/recs`)
       .then(res => res.json())
       .then(activities => setRecsArray(activities))
     }
@@ -76,20 +76,30 @@ function App() {
   }
 
   function handleDelete (e) {
-    console.log(e.target.parentElement)
-    // fetch(`http://127.0.0.1:9393/bookings/${loggedInUser.id}`, {
-    //   method: "DELETE",
-    //   headers: {
-    //     "Content-type": "application/json"
-    //   }
-    // })
+    console.log(e.target.matches("span"))
+    let id;
+    if (e.target.matches("span")) {
+      id = e.target.parentElement.parentElement.parentElement.parentElement.id
+    } else {
+      id = e.target.parentElement.parentElement.parentElement.id
+    }
+    console.log(id)
+    fetch(`https://damp-mesa-84128.herokuapp.com/bookings/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json"
+      }
+    })
+    .then(res => res.json())
+    .then(booking => {
+      let updatedBookings = myBookings.filter(b => b.id !== booking.id)
+      setMyBookings(updatedBookings)
+    })
   }
 
   function changeHandler (e) {
     setDayOfWeek(e.target.value)
   }
-  // will be building a use effect hook to reach into the database on page load and setting users state
-  // console.log(`users: ${users}`)
 
   window.addEventListener('resize', () => setWindowWidth(window.innerWidth))
 

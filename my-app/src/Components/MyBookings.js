@@ -12,21 +12,14 @@ function MyBookings ({myBookings, handleDelete}) {
     } )
     let myBookingsArray = sortedBookings.map((booking, index) => {
         let truthyAttributes = []
+        console.log(booking)
         for (const key in booking.activity) {
         if (key !== "id" && key !== "name" && key !== "img_url" && key !== "description" && booking.activity[key]) truthyAttributes.push(key)
         }
     return <Grid item xs={6} sm={3} key={index} >
-       <ActivityCard handleDelete={handleDelete} activityUsers={booking.activity_users} dayOfWeek={booking.day_of_week} imageURL={booking.activity.img_url} description={booking.activity.description} activityName={booking.activity.name} truthyAttributes={truthyAttributes}/>
+       <ActivityCard handleDelete={handleDelete} activityUsers={booking.activity_users} dayOfWeek={booking.day_of_week} imageURL={booking.activity.img_url} description={booking.activity.description} activityName={booking.activity.name} truthyAttributes={truthyAttributes} bookingID={booking.id} />
         </Grid>
     })
-    // console.log(myBookings)
-    // let myBookingCards = []
-
-    // activityMorning={booking.activity.morning} activityAfternoon={booking.activity.afternoon} activityEvening={booking.activity.evening} activityShortWorkout={booking.activity.short_workout} activityMediumWorkout={booking.activity.medium_workout} activityLongWorkout={booking.activity.long_workout} activityMusic={booking.activity.music} activityCardio={booking.activity.cardio} activityStrength={booking.activity.strength} activitySmallSize={booking.activity.small_class_size} activityMediumSize={booking.activity.medium_class_size} activityLargeSize={booking.activity.large_class_size}
-
-  
-
-// MyActivities = bookings.map(activity => <activitycard props/>)
 
     return ( 
     <div style={{fontFamily:'Cinzel', width: '100vw'}}>

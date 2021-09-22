@@ -2,7 +2,7 @@ import { Card, Button } from '@material-ui/core'
 import { useState, useEffect } from "react"
 import Box from '@material-ui/core/Box';
 
-function ActivityCard ({dayOfWeek, imageURL, activityName, description, activityUsers, handleBooking, activityId, selectedDay, truthyAttributes, handleDelete}) {
+function ActivityCard ({dayOfWeek, imageURL, activityName, description, activityUsers, handleBooking, activityId, selectedDay, truthyAttributes, handleDelete, bookingID}) {
     
     const [displayUsers, setDisplayUsers] = useState(false)
     const [activityUsersExists, setExistsStatus] = useState(false)
@@ -36,33 +36,15 @@ function ActivityCard ({dayOfWeek, imageURL, activityName, description, activity
     //    if (attribute === "large_class_size") attr = `more than 30 people`
        return <li key={index}>{joinedAttr}</li>
     })
-    
-    
-    // console.log(`activityUsersExist: ${activityUsersExists}`)
-    // console.log(`displayUsers: ${displayUsers}`)
 
     return(
-        <Card style={{ display: 'flex', alignItems:'center', flexDirection: 'column', flexWrap: 'wrap', height: '50vh', overflow: 'auto', textAlign: 'center'}}>
+        <Card id={bookingID} style={{ display: 'flex', alignItems:'center', flexDirection: 'column', flexWrap: 'wrap', height: '50vh', overflow: 'auto', textAlign: 'center'}}>
             <Box component='div' my={2} overflow="auto" style={{padding: '15px', display: 'flex', alignItems:'center', flexDirection: 'column', height: '45vh'}}>
             {dayOfWeek ? <h4>{dayOfWeek}</h4> : null }
             <h3 style={{textAlign: 'center'}}>{activityName}</h3>
             <img src={imageURL} alt='activity' style={{height:'120px', width:'120px', padding: '5px'}}/>
             <br></br>
-            
-            {/* {activityUsersExists ?
-            (displayUsers ?
-                <>
-                    <ul>
-                        {activityUsersList}
-                    </ul> 
-                    <Button variant="contained" onClick={() => setDisplayUsers(!displayUsers)}>Hide Users</Button> 
-                </>:
-                <Button variant="contained" onClick={() => setDisplayUsers(!displayUsers)}>Show Users</Button>
-            ) :
-            <div style={{justifyContent: 'center'}}>
-            <Button variant="contained" id={activityId} onClick={handleBooking}> Book This Activity! </Button>
-            </div>
-            } */}
+    
 
             {!activityUsersExists
             ? <div style={{justifyContent: 'center', alignItems: 'center'}}>
