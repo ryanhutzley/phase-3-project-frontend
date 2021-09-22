@@ -18,7 +18,7 @@ A gym membership application that recommends exercise classes based on user pref
 
 **Fork and clone this repository**.
 
-Next, `cd` into the `my-app` directory.
+Next, `cd` into the `my-app` directory of the cloned repo.
 
 Then run the following commands:
 
