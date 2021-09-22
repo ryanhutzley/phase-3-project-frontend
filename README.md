@@ -12,6 +12,8 @@ A gym membership application that recommends exercise classes based on user pref
 
 ## Requirements
 
+- NodeJS (v14 or higher), and npm
+
 ## Setup
 
 **Fork and clone this repository**.
