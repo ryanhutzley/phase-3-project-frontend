@@ -10,6 +10,8 @@
 
 A gym membership application that recommends exercise classes based on user preferences and displays other attendees for a class
 
+**Check out the live site [here](https://www.pumpingflatiron.com)!**
+
 ## Requirements
 
 - NodeJS (v14 or higher), and npm
